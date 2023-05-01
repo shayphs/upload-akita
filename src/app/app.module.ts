@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
@@ -11,6 +13,9 @@ import { environment } from '../environments/environment';
   declarations: [AppComponent, UploadFilesComponent, FilesMenuComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
   providers: [],

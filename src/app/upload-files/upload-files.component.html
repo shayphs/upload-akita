@@ -5,11 +5,12 @@
 </header>
 
 <div class="content">
-  <form action="">
+  <form [formGroup]="uploadForm" novalidate>
     <input
       type="text"
       name="file-name"
       class="file-name"
+      formControlName="fileName"
       placeholder="הכנס כותרת"
     />
     <label for="file-upload" class="file-upload">
@@ -52,8 +53,8 @@
         </svg>
       </div>
       <div>העלה קובץ</div>
-      <input type="file" id="file-upload" />
+      <input type="file" id="file-upload" (change)="onFileChange($event)" />
     </label>
-    <button type="submit" class="file-btn">שלח</button>
+    <button type="submit" class="file-btn" (click)="submitFile()">שלח</button>
   </form>
 </div>

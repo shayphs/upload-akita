@@ -22,10 +22,7 @@ export class UploadFilesService {
 
   add(uploadFile: UploadFile) {
     this.uploadFilesStore.add(uploadFile);
-  }
-
-  update(id: ID, uploadFile: Partial<UploadFile>) {
-    this.uploadFilesStore.update(id, uploadFile);
+    console.log(this.uploadFilesStore);
   }
 
   remove(id: ID) {
