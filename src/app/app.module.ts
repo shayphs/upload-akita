@@ -9,7 +9,10 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, UploadFilesComponent, FilesMenuComponent],
-  imports: [BrowserModule, environment.production ? [] : AkitaNgDevtools.forRoot()],
+  imports: [
+    BrowserModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

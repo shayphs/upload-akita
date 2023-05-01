@@ -4,9 +4,7 @@ import { UploadFilesStore, UploadFilesState } from './upload-files.store';
 
 @Injectable({ providedIn: 'root' })
 export class UploadFilesQuery extends QueryEntity<UploadFilesState, any> {
-
   constructor(protected override store: UploadFilesStore) {
     super(store);
   }
-
 }

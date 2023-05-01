@@ -3,7 +3,5 @@ export interface UploadFile {
 }
 
 export function createUploadFile(params: Partial<UploadFile>) {
-  return {
-
-  } as UploadFile;
+  return {} as UploadFile;
 }

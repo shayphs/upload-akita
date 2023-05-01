@@ -7,15 +7,17 @@ import { UploadFilesStore } from './upload-files.store';
 
 @Injectable({ providedIn: 'root' })
 export class UploadFilesService {
-
-  constructor(private uploadFilesStore: UploadFilesStore, private http: HttpClient) {
-  }
-
+  constructor(
+    private uploadFilesStore: UploadFilesStore,
+    private http: HttpClient
+  ) {}
 
   get() {
-    return this.http.get<UploadFile[]>('https://api.com').pipe(tap(entities => {
-      this.uploadFilesStore.set(entities);
-    }));
+    return this.http.get<UploadFile[]>('https://api.com').pipe(
+      tap((entities) => {
+        this.uploadFilesStore.set(entities);
+      })
+    );
   }
 
   add(uploadFile: UploadFile) {
@@ -29,5 +31,4 @@ export class UploadFilesService {
   remove(id: ID) {
     this.uploadFilesStore.remove(id);
   }
-
 }
