@@ -1,0 +1,49 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 2em;
+  background-color: whitesmoke;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 98vh;
+  width: 100%;
+  margin: 0;
+  justify-content: center;
+}
+
+.file-name {
+  display: flex;
+  width: 300px;
+  padding: 1em;
+  margin: 1em;
+  font-size: 14px;
+  text-align: center;
+}
+
+.file-upload {
+  display: flex;
+  padding: 1em;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+}
+
+#file-upload {
+  display: none;
+}
+
+.file-btn {
+  display: block;
+  padding: 0.5em 2em;
+  margin: 1em auto;
+  font-size: 18px;
+}
