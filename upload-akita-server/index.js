@@ -43,9 +43,29 @@ app.post('/upload-akita-file', async (req, res) => {
                         }
                     });
                 }
-
             });
         }
+    } catch (err) {
+        return res.status(500).send(err);
+    }
+});
+
+app.get('/file-list', async (req, res) => {
+    try {
+        require("fs").readdir('./my-files/' , function (err, data) {
+            if (err) {
+                return res.status(500).send({
+                    status: false,
+                    message: err
+                });
+            } else {
+                return res.status(200).send({
+                    status: true,
+                    data: data.filter((file) => file !== '.gitkeep')
+                });
+            }
+        });
+
     } catch (err) {
         return res.status(500).send(err);
     }
