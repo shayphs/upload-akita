@@ -65,6 +65,7 @@ app.get("/file-list", async (req, res) => {
         let list = data.filter((file) => file !== ".gitkeep");
         list = list.map((file) => {
           return {
+            id: file,
             fileName: file,
           };
         });

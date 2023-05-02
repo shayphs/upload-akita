@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { UploadFilesQuery } from '../state/upload-files.query';
+import { UploadFilesService } from '../state/upload-files.service';
 import { Observable } from 'rxjs';
 import { UploadFile } from '../state/upload-file.model';
 
@@ -10,10 +11,11 @@ import { UploadFile } from '../state/upload-file.model';
 })
 export class FilesMenuComponent implements OnInit {
   isOpen: boolean = false;
-  listFiles$!: Observable<UploadFile[]>;
+  listFiles$: Observable<UploadFile[]> = this.uploadFilesQuery.selectAll();
 
   constructor(
     private uploadFilesQuery: UploadFilesQuery,
+    private uploadFilesService: UploadFilesService,
     private elementRef: ElementRef
   ) {}
 
@@ -25,9 +27,10 @@ export class FilesMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listFiles$ = this.uploadFilesQuery.selectAll();
-    // this.uploadFilesQuery.selectAll().subscribe((res) => {
-    //   console.log(res);
-    // });
+    this.uploadFilesService.get().subscribe();
+  }
+
+  downloadFile(fileName: string) {
+    window.open('http://localhost:3000/my-files/' + fileName, '_blank');
   }
 }

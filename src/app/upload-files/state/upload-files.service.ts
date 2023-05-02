@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ID } from '@datorama/akita';
 import { tap } from 'rxjs/operators';
-import { UploadFile } from './upload-file.model';
+import { UploadFile, createUploadFile } from './upload-file.model';
 import { UploadFilesStore } from './upload-files.store';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UploadFilesService {
@@ -13,19 +13,24 @@ export class UploadFilesService {
   ) {}
 
   get() {
-    return this.http.get<UploadFile[]>('https://api.com').pipe(
+    return this.http.get<any>('http://localhost:3000/file-list').pipe(
       tap((entities) => {
         this.uploadFilesStore.set(entities);
       })
     );
   }
 
-  add(uploadFile: UploadFile) {
-    this.uploadFilesStore.add(uploadFile);
-    console.log(this.uploadFilesStore);
-  }
-
-  remove(id: ID) {
-    this.uploadFilesStore.remove(id);
+  uploadFile(uploadFile: UploadFile): Observable<UploadFile> {
+    return this.http
+      .post<UploadFile>('http://localhost:3000/upload-akita-file', uploadFile)
+      .pipe(
+        tap((value) => {
+          console.log(value);
+          if (!!value.status) {
+            const uf = createUploadFile(value);
+            this.uploadFilesStore.add(uf);
+          }
+        })
+      );
   }
 }
