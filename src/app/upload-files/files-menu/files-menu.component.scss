@@ -1,6 +1,5 @@
 .download-icon {
-  margin-right: 0.5em;
-  vertical-align: middle;
+  margin-right: 1em;
 }
 
 .files-menu-wrapper {
@@ -28,6 +27,9 @@
   li {
     padding: 0.75em 2em;
     cursor: pointer;
+    .lnk {
+      display: flex;
+    }
   }
 }
 

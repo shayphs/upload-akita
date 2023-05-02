@@ -1,25 +1,19 @@
 <div class="files-menu-wrapper">
   <button class="btn-circle" (click)="isOpen = !isOpen">
-    <div class="counter-badge">3</div>
+    <div class="counter-badge">{{ (listFiles$ | async)?.length }}</div>
   </button>
 
   <div class="menu" [ngClass]="{ open: isOpen }">
     <ul class="list-files">
-      <li>
-        <img
-          src="/assets/svg/download-1453-svgrepo-com.svg"
-          class="download-icon"
-          alt="Download file"
-        />
-        file 1
-      </li>
-      <li>
-        <img
-          src="/assets/svg/download-1453-svgrepo-com.svg"
-          class="download-icon"
-          alt="Download file"
-        />
-        file 2
+      <li *ngFor="let fl of listFiles$ | async">
+        <div class="lnk">
+          <img
+            src="/assets/svg/download-1453-svgrepo-com.svg"
+            class="download-icon"
+            alt="Download file"
+          />
+          <p>{{ fl.fileName }}</p>
+        </div>
       </li>
     </ul>
   </div>
