@@ -71,8 +71,12 @@ export class UploadFilesComponent implements OnInit {
     if (!this.uploadForm.value.fileName) {
       this.uploadForm.value.fileName = this.uploadForm.value.file.fileData.name;
     } else {
-      this.uploadForm.value.fileName = this.uploadForm.value.fileName  + '.' + this.uploadForm.value.file.fileData.name
-      .substr(this.uploadForm.value.file.fileData.name.lastIndexOf('.') + 1);
+      this.uploadForm.value.fileName =
+        this.uploadForm.value.fileName +
+        '.' +
+        this.uploadForm.value.file.fileData.name.substr(
+          this.uploadForm.value.file.fileData.name.lastIndexOf('.') + 1
+        );
     }
 
     this.uploadFilesService.uploadFile(this.uploadForm.value).subscribe({
@@ -86,12 +90,12 @@ export class UploadFilesComponent implements OnInit {
         }
       },
       error: (err) => {
-       console.log(err); 
-       this.fileUploadedError = true;
-       setTimeout(() => {
-         this.fileUploadedError = false;
-       }, 3000);
-      }
+        console.log(err);
+        this.fileUploadedError = true;
+        setTimeout(() => {
+          this.fileUploadedError = false;
+        }, 3000);
+      },
     });
   }
 }

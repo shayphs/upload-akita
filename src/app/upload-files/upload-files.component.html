@@ -63,6 +63,13 @@
     <div class="fail" *ngIf="fileTypeError">
       נא להעלות רק קבצים מסוג pdf או word
     </div>
-    <button type="submit" class="file-btn" (click)="submitFile()" [disabled]="!uploadForm.value?.file?.fileData || fileTypeError">שלח</button>
+    <button
+      type="submit"
+      class="file-btn"
+      (click)="submitFile()"
+      [disabled]="!uploadForm.value?.file?.fileData || fileTypeError"
+    >
+      שלח
+    </button>
   </form>
 </div>
