@@ -8,68 +8,72 @@
   <div class="success" *ngIf="fileUploadedSuccess">הקובץ הועלה בהצלחה</div>
   <div class="fail" *ngIf="fileUploadedError">פעולה העלאת הקובץ נכשלה</div>
   <form [formGroup]="uploadForm" novalidate>
-    <input
-      type="text"
-      name="file-name"
-      class="file-name"
-      formControlName="fileName"
-      placeholder="הכנס כותרת"
-    />
-    <label for="file-upload" class="file-upload">
-      <div>
-        <svg
-          width="60px"
-          height="60px"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7"
-            fill="none"
-            stroke="#2391f2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-          <polyline
-            data-name="Right"
-            fill="none"
-            id="Right-2"
-            points="7.9 6.7 12 2.7 16.1 6.7"
-            stroke="#2391f2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-          <line
-            fill="none"
-            stroke="#2391f2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            x1="12"
-            x2="12"
-            y1="16.3"
-            y2="4.8"
-          />
-        </svg>
-      </div>
-      <div>העלה קובץ</div>
-      <input type="file" id="file-upload" (change)="onFileChange($event)" />
-    </label>
-    <div class="file-name-to-upload" *ngIf="uploadForm.value?.file?.fileData">
-      {{ uploadForm.value.file.fileData.name }}
-    </div>
-    <div class="fail" *ngIf="fileTypeError">
-      נא להעלות רק קבצים מסוג pdf או word
-    </div>
-    <button
-      type="submit"
-      class="file-btn"
-      (click)="submitFile()"
-      [disabled]="!uploadForm.value?.file?.fileData || fileTypeError"
+    <fieldset
+      [disabled]="fileTypeError || fileUploadedError || fileUploadedSuccess"
     >
-      שלח
-    </button>
+      <input
+        type="text"
+        name="file-name"
+        class="file-name"
+        formControlName="fileName"
+        placeholder="הכנס כותרת"
+      />
+      <label for="file-upload" class="file-upload">
+        <div>
+          <svg
+            width="60px"
+            height="60px"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7"
+              fill="none"
+              stroke="#2391f2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <polyline
+              data-name="Right"
+              fill="none"
+              id="Right-2"
+              points="7.9 6.7 12 2.7 16.1 6.7"
+              stroke="#2391f2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <line
+              fill="none"
+              stroke="#2391f2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              x1="12"
+              x2="12"
+              y1="16.3"
+              y2="4.8"
+            />
+          </svg>
+        </div>
+        <div>העלה קובץ</div>
+        <input type="file" id="file-upload" (change)="onFileChange($event)" />
+      </label>
+      <div class="file-name-to-upload" *ngIf="uploadForm.value?.file?.fileData">
+        {{ uploadForm.value.file.fileData.name }}
+      </div>
+      <div class="fail" *ngIf="fileTypeError">
+        נא להעלות רק קבצים מסוג pdf או word
+      </div>
+      <button
+        type="submit"
+        class="file-btn"
+        (click)="submitFile()"
+        [disabled]="!uploadForm.value?.file?.fileData || fileTypeError"
+      >
+        שלח
+      </button>
+    </fieldset>
   </form>
 </div>
