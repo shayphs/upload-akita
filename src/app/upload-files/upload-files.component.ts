@@ -9,6 +9,9 @@ import { UploadFilesService } from './state/upload-files.service';
 })
 export class UploadFilesComponent implements OnInit {
   uploadForm!: FormGroup;
+  fileTypeErrpr = false;
+  fileUploadedSuccess = false;
+  fileUploadedError = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +32,14 @@ export class UploadFilesComponent implements OnInit {
   onFileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
+      this.fileTypeErrpr = false;
+      if (
+        file.type !== 'application/pdf' &&
+        file.type !==
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ) {
+        this.fileTypeErrpr = true;
+      }
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
@@ -45,16 +56,16 @@ export class UploadFilesComponent implements OnInit {
           },
           content: content,
         };
+
+        // this.uploadForm.value.file = fileToUpload;
         this.uploadForm.get('file')?.setValue(fileToUpload);
       };
     }
   }
 
   submitFile() {
-    if (!this.uploadForm.get('fileName')?.value) {
-      this.uploadForm
-        .get('fileName')
-        ?.setValue(this.uploadForm.get('file')?.value.fileData.name);
+    if (!this.uploadForm.value.fileName) {
+      this.uploadForm.value.fileName = this.uploadForm.value.file.fileData.name;
     }
 
     this.uploadFilesService.add(this.uploadForm.value);
