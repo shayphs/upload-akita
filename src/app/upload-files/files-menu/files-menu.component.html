@@ -6,13 +6,13 @@
   <div class="menu" [ngClass]="{ open: isOpen }">
     <ul class="list-files">
       <li *ngFor="let fl of listFiles$ | async">
-        <div class="lnk">
+        <div class="lnk" (click)="downloadFile(fl.fileName)">
           <img
             src="/assets/svg/download-1453-svgrepo-com.svg"
             class="download-icon"
             alt="Download file"
           />
-          <p>{{ fl.fileName }}</p>
+          <div class="file-name-break">{{ fl.fileName }}</div>
         </div>
       </li>
     </ul>

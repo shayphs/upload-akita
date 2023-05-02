@@ -30,6 +30,9 @@
     .lnk {
       display: flex;
     }
+    .file-name-break {
+      word-break: break-all;
+    }
   }
 }
 
