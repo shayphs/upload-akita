@@ -9,7 +9,7 @@ import { UploadFilesService } from './state/upload-files.service';
 })
 export class UploadFilesComponent implements OnInit {
   uploadForm!: FormGroup;
-  fileTypeErrpr = false;
+  fileTypeError = false;
   fileUploadedSuccess = false;
   fileUploadedError = false;
 
@@ -32,13 +32,17 @@ export class UploadFilesComponent implements OnInit {
   onFileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.fileTypeErrpr = false;
+      this.fileTypeError = false;
       if (
         file.type !== 'application/pdf' &&
         file.type !==
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       ) {
-        this.fileTypeErrpr = true;
+        this.fileTypeError = true;
+        setTimeout(() => {
+          this.fileTypeError = false;
+          this.uploadForm.reset();
+        }, 3000);
       }
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -66,8 +70,28 @@ export class UploadFilesComponent implements OnInit {
   submitFile() {
     if (!this.uploadForm.value.fileName) {
       this.uploadForm.value.fileName = this.uploadForm.value.file.fileData.name;
+    } else {
+      this.uploadForm.value.fileName = this.uploadForm.value.fileName  + '.' + this.uploadForm.value.file.fileData.name
+      .substr(this.uploadForm.value.file.fileData.name.lastIndexOf('.') + 1);
     }
 
-    this.uploadFilesService.add(this.uploadForm.value);
+    this.uploadFilesService.uploadFile(this.uploadForm.value).subscribe({
+      next: (value) => {
+        if (!!value?.status) {
+          this.fileUploadedSuccess = true;
+          setTimeout(() => {
+            this.fileUploadedSuccess = false;
+            this.uploadForm.reset();
+          }, 3000);
+        }
+      },
+      error: (err) => {
+       console.log(err); 
+       this.fileUploadedError = true;
+       setTimeout(() => {
+         this.fileUploadedError = false;
+       }, 3000);
+      }
+    });
   }
 }

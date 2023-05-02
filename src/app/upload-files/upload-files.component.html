@@ -5,6 +5,8 @@
 </header>
 
 <div class="content">
+  <div class="success" *ngIf="fileUploadedSuccess">הקובץ הועלה בהצלחה</div>
+  <div class="fail" *ngIf="fileUploadedError">פעולה העלאת הקובץ נכשלה</div>
   <form [formGroup]="uploadForm" novalidate>
     <input
       type="text"
@@ -55,15 +57,12 @@
       <div>העלה קובץ</div>
       <input type="file" id="file-upload" (change)="onFileChange($event)" />
     </label>
-    <div class="file-name-to-upload" *ngIf="uploadForm.value.file.fileData">
+    <div class="file-name-to-upload" *ngIf="uploadForm.value?.file?.fileData">
       {{ uploadForm.value.file.fileData.name }}
     </div>
-    <div class="fail" *ngIf="fileTypeErrpr">
+    <div class="fail" *ngIf="fileTypeError">
       נא להעלות רק קבצים מסוג pdf או word
     </div>
-    <button type="submit" class="file-btn" (click)="submitFile()">שלח</button>
-
-    <div class="success" *ngIf="fileUploadedSuccess">הקובץ הועלה בהצלחה</div>
-    <div class="fail" *ngIf="fileUploadedError">פעולה העלאת הקובץ נכשלה</div>
+    <button type="submit" class="file-btn" (click)="submitFile()" [disabled]="!uploadForm.value?.file?.fileData || fileTypeError">שלח</button>
   </form>
 </div>
