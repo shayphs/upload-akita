@@ -9,7 +9,7 @@
   <div class="fail" *ngIf="fileUploadedError">פעולה העלאת הקובץ נכשלה</div>
   <form [formGroup]="uploadForm" novalidate>
     <fieldset
-      [disabled]="fileTypeError || fileUploadedError || fileUploadedSuccess"
+      [disabled]="fileTypeError || fileUploadedError || fileUploadedSuccess || isLoading"
     >
       <input
         type="text"
@@ -19,7 +19,7 @@
         placeholder="הכנס כותרת"
       />
       <label for="file-upload" class="file-upload">
-        <div>
+        <div [ngClass]="{anim: isLoading}">
           <svg
             width="60px"
             height="60px"
@@ -72,7 +72,8 @@
         (click)="submitFile()"
         [disabled]="!uploadForm.value?.file?.fileData || fileTypeError"
       >
-        שלח
+        <span *ngIf="!isLoading">שלח</span>
+        <span *ngIf="isLoading">המתן...</span>
       </button>
     </fieldset>
   </form>

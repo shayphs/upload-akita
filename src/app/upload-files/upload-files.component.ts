@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UploadFilesService } from './state/upload-files.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-upload-files',
@@ -12,6 +13,7 @@ export class UploadFilesComponent implements OnInit {
   fileTypeError = false;
   fileUploadedSuccess = false;
   fileUploadedError = false;
+  isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,7 +81,14 @@ export class UploadFilesComponent implements OnInit {
         );
     }
 
-    this.uploadFilesService.uploadFile(this.uploadForm.value).subscribe({
+    this.isLoading = true;
+    this.uploadFilesService.uploadFile(this.uploadForm.value)
+    .pipe(
+      finalize(() => {
+        this.isLoading = false;
+      })
+    )
+    .subscribe({
       next: (value) => {
         if (!!value?.status) {
           this.fileUploadedSuccess = true;

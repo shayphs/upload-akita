@@ -46,6 +46,7 @@
   padding: 0.5em 2em;
   margin: 1em auto;
   font-size: 18px;
+  direction: rtl;
 }
 
 .file-name-to-upload {
@@ -66,4 +67,21 @@
 
 fieldset {
   border: none;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.2;
+    transform: scale(1.01) translate(0, -0.5em);
+  }
+  0% {
+    opacity: 0.8;
+  }
+}
+
+.anim {
+  animation: blink 1s ease-in-out infinite;
 }
