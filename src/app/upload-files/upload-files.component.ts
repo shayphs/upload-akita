@@ -28,6 +28,7 @@ export class UploadFilesComponent implements OnInit {
     this.uploadForm = this.formBuilder.group({
       fileName: '',
       file: {},
+      selectFile: '',
     });
   }
 
@@ -44,6 +45,7 @@ export class UploadFilesComponent implements OnInit {
         setTimeout(() => {
           this.fileTypeError = false;
           this.uploadForm.reset();
+          this.uploadForm.markAsPristine();
         }, 3000);
       }
       const reader = new FileReader();
@@ -63,7 +65,6 @@ export class UploadFilesComponent implements OnInit {
           content: content,
         };
 
-        // this.uploadForm.value.file = fileToUpload;
         this.uploadForm.get('file')?.setValue(fileToUpload);
       };
     }
@@ -95,6 +96,7 @@ export class UploadFilesComponent implements OnInit {
           setTimeout(() => {
             this.fileUploadedSuccess = false;
             this.uploadForm.reset();
+            this.uploadForm.markAsPristine();
           }, 3000);
         }
       },
@@ -103,6 +105,8 @@ export class UploadFilesComponent implements OnInit {
         this.fileUploadedError = true;
         setTimeout(() => {
           this.fileUploadedError = false;
+          this.uploadForm.reset();
+          this.uploadForm.markAsPristine();
         }, 3000);
       },
     });

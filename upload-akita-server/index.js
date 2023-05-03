@@ -28,7 +28,7 @@ app.post("/upload-akita-file", async (req, res) => {
       require("fs").writeFile(
         "./my-files/" + req.body.fileName,
         req.body.file.content,
-        "base64",
+        { encoding: "base64", flag: "wx" },
         function (err) {
           if (err) {
             return res.status(500).send({

@@ -6,7 +6,7 @@
 
 <div class="content">
   <div class="success" *ngIf="fileUploadedSuccess">הקובץ הועלה בהצלחה</div>
-  <div class="fail" *ngIf="fileUploadedError">פעולה העלאת הקובץ נכשלה</div>
+  <div class="fail" *ngIf="fileUploadedError">פעולת העלאת הקובץ נכשלה</div>
   <form [formGroup]="uploadForm" novalidate>
     <fieldset
       [disabled]="fileTypeError || fileUploadedError || fileUploadedSuccess || isLoading"
@@ -58,7 +58,7 @@
           </svg>
         </div>
         <div>העלה קובץ</div>
-        <input type="file" id="file-upload" (change)="onFileChange($event)" />
+        <input type="file" id="file-upload" formControlName="selectFile" (change)="onFileChange($event)" />
       </label>
       <div class="file-name-to-upload" *ngIf="uploadForm.value?.file?.fileData">
         {{ uploadForm.value.file.fileData.name }}
