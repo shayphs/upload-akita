@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { UploadFilesQuery } from '../state/upload-files.query';
 import { UploadFilesService } from '../state/upload-files.service';
 import { Observable } from 'rxjs';
@@ -31,6 +32,6 @@ export class FilesMenuComponent implements OnInit {
   }
 
   downloadFile(fileName: string) {
-    window.open('http://localhost:3000/my-files/' + fileName, '_blank');
+    window.open(`${environment.serverUrl}/my-files/${fileName}`, '_blank');
   }
 }

@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 import { UploadFile, createUploadFile } from './upload-file.model';
 import { UploadFilesStore } from './upload-files.store';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UploadFilesService {
@@ -13,7 +14,7 @@ export class UploadFilesService {
   ) {}
 
   get() {
-    return this.http.get<any>('http://localhost:3000/file-list').pipe(
+    return this.http.get<any>(`${environment.serverUrl}/file-list`).pipe(
       tap((entities) => {
         this.uploadFilesStore.set(entities);
       })
@@ -22,7 +23,7 @@ export class UploadFilesService {
 
   uploadFile(uploadFile: UploadFile): Observable<UploadFile> {
     return this.http
-      .post<UploadFile>('http://localhost:3000/upload-akita-file', uploadFile)
+      .post<UploadFile>(`${environment.serverUrl}/upload-akita-file`, uploadFile)
       .pipe(
         tap((value) => {
           if (!!value.status) {
