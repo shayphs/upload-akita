@@ -83,32 +83,33 @@ export class UploadFilesComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.uploadFilesService.uploadFile(this.uploadForm.value)
-    .pipe(
-      finalize(() => {
-        this.isLoading = false;
-      })
-    )
-    .subscribe({
-      next: (value) => {
-        if (!!value?.status) {
-          this.fileUploadedSuccess = true;
+    this.uploadFilesService
+      .uploadFile(this.uploadForm.value)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe({
+        next: (value) => {
+          if (!!value?.status) {
+            this.fileUploadedSuccess = true;
+            setTimeout(() => {
+              this.fileUploadedSuccess = false;
+              this.uploadForm.reset();
+              this.uploadForm.markAsPristine();
+            }, 3000);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+          this.fileUploadedError = true;
           setTimeout(() => {
-            this.fileUploadedSuccess = false;
+            this.fileUploadedError = false;
             this.uploadForm.reset();
             this.uploadForm.markAsPristine();
           }, 3000);
-        }
-      },
-      error: (err) => {
-        console.log(err);
-        this.fileUploadedError = true;
-        setTimeout(() => {
-          this.fileUploadedError = false;
-          this.uploadForm.reset();
-          this.uploadForm.markAsPristine();
-        }, 3000);
-      },
-    });
+        },
+      });
   }
 }

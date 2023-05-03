@@ -23,7 +23,10 @@ export class UploadFilesService {
 
   uploadFile(uploadFile: UploadFile): Observable<UploadFile> {
     return this.http
-      .post<UploadFile>(`${environment.serverUrl}/upload-akita-file`, uploadFile)
+      .post<UploadFile>(
+        `${environment.serverUrl}/upload-akita-file`,
+        uploadFile
+      )
       .pipe(
         tap((value) => {
           if (!!value.status) {

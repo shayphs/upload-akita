@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import { UploadFilesModule } from './upload-files/upload-files.module';
 
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

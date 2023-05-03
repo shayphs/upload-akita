@@ -1,15 +1,11 @@
-<header>
-  <nav class="toolbar">
-    <app-files-menu></app-files-menu>
-  </nav>
-</header>
-
 <div class="content">
   <div class="success" *ngIf="fileUploadedSuccess">הקובץ הועלה בהצלחה</div>
   <div class="fail" *ngIf="fileUploadedError">פעולת העלאת הקובץ נכשלה</div>
   <form [formGroup]="uploadForm" novalidate>
     <fieldset
-      [disabled]="fileTypeError || fileUploadedError || fileUploadedSuccess || isLoading"
+      [disabled]="
+        fileTypeError || fileUploadedError || fileUploadedSuccess || isLoading
+      "
     >
       <input
         type="text"
@@ -19,7 +15,7 @@
         placeholder="הכנס כותרת"
       />
       <label for="file-upload" class="file-upload">
-        <div [ngClass]="{anim: isLoading}">
+        <div [ngClass]="{ anim: isLoading }">
           <svg
             width="60px"
             height="60px"
@@ -58,7 +54,12 @@
           </svg>
         </div>
         <div>העלה קובץ</div>
-        <input type="file" id="file-upload" formControlName="selectFile" (change)="onFileChange($event)" />
+        <input
+          type="file"
+          id="file-upload"
+          formControlName="selectFile"
+          (change)="onFileChange($event)"
+        />
       </label>
       <div class="file-name-to-upload" *ngIf="uploadForm.value?.file?.fileData">
         {{ uploadForm.value.file.fileData.name }}
