@@ -47,6 +47,15 @@
   margin: 1em auto;
   font-size: 18px;
   direction: rtl;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  color: #555;
+  cursor: pointer;
+  &:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+  }
 }
 
 .file-name-to-upload {
