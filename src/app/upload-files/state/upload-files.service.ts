@@ -25,7 +25,6 @@ export class UploadFilesService {
       .post<UploadFile>('http://localhost:3000/upload-akita-file', uploadFile)
       .pipe(
         tap((value) => {
-          console.log(value);
           if (!!value.status) {
             const uf = createUploadFile(value);
             this.uploadFilesStore.add(uf);

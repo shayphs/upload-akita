@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 import { AppComponent } from './app.component';
-import { UploadFilesComponent } from './upload-files/upload-files.component';
-import { FilesMenuComponent } from './upload-files/files-menu/files-menu.component';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
+import { UploadFilesModule } from './upload-files/upload-files.module';
 
 @NgModule({
-  declarations: [AppComponent, UploadFilesComponent, FilesMenuComponent],
+  declarations: [AppComponent, ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    UploadFilesModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
   providers: [],
